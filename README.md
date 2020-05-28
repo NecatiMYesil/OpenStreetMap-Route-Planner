@@ -3,6 +3,7 @@ The Route Planning project.
 Used Area
 
 <img src="map.png" width="600" height="450" />
+
 ## Dependencies
 * cmake >= 3.11.3
   * All OSes: [click here for installation instructions](https://cmake.org/install/)
@@ -17,6 +18,7 @@ Used Area
 * IO2D
   * Installation instructions for all operating systems can be found [here](https://github.com/cpp-io2d/P0267_RefImpl/blob/master/BUILDING.md)
   * This library must be built in a place where CMake `find_package` will be able to find it
+
 
 ## Compiling and Running
 
