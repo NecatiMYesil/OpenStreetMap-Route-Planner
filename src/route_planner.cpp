@@ -10,6 +10,9 @@ RoutePlanner::RoutePlanner(RouteModel &model, float start_x, float start_y, floa
 
     // TODO 2: Use the m_Model.FindClosestNode method to find the closest nodes to the starting and ending coordinates.
     // Store the nodes you find in the RoutePlanner's start_node and end_node attributes.
+    
+    start_node = &model.FindClosestNode(start_x, start_y);
+    end_node = &model.FindClosestNode( end_x, end_y);
 
 }
 
@@ -18,9 +21,8 @@ RoutePlanner::RoutePlanner(RouteModel &model, float start_x, float start_y, floa
 // Tips:
 // - You can use the distance to the end_node for the h value.
 // - Node objects have a distance method to determine the distance to another node.
-
 float RoutePlanner::CalculateHValue(RouteModel::Node const *node) {
-
+    return node -> distance(*end_node);
 }
 
 
@@ -32,6 +34,34 @@ float RoutePlanner::CalculateHValue(RouteModel::Node const *node) {
 // - For each node in current_node.neighbors, add the neighbor to open_list and set the node's visited attribute to true.
 
 void RoutePlanner::AddNeighbors(RouteModel::Node *current_node) {
+     current_node -> FindNeighbors();
+    for(RouteModel::Node *neighbor : current_node -> neighbors){
+        if(!neighbor -> visited){
+            neighbor -> parent = current_node;
+            neighbor -> h_value = CalculateHValue(neighbor);
+            neighbor -> g_value = neighbor -> distance(*neighbor -> parent);
+            open_list.push_back(neighbor);
+            neighbor -> visited = true;
+        }
+    }
+
+    /*
+    if(!cuerrent_node -> visited){
+        current_node -> h_value = CalculateHValue(current_node);
+
+        if(current_node -> parent){
+            current_node -> g_value = current_node -> distance(*current_node->parent); 
+        }
+        else{
+            current_node->g_value =0.0;
+        }
+        open_list.push_back(current_node);
+        current_node->visited = true;
+    }
+    
+    */
+        
+
 
 }
 
